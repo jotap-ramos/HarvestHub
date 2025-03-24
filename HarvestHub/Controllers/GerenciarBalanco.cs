@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using HarvestHub.Models;
+using HarvestHub.Data;
 
 namespace HarvestHub.Controllers
 {
@@ -28,9 +29,7 @@ namespace HarvestHub.Controllers
             {
                 try
                 {
-                    despesa.DataRegistro = DateTime.Now.Date; // Define a data atual (opcional)
-                    _context.Despesas.Add(despesa);
-                    await _context.SaveChangesAsync();
+                   
                     
                     TempData["Success"] = "Despesa cadastrada com sucesso!";
                     return RedirectToAction(nameof(Create));

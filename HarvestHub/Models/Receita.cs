@@ -1,34 +1,19 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
-namespace HarvestHub.Models
+namespace HarvestHub.Models;
+
+public partial class Receita
 {
-    [Table("RECEITA")]
-    public class Receita
-    {
-        [Key]
-        [Column("idRECEITA")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+    public int Idreceita { get; set; }
 
-        [Required]
-        [Column("TIPO")]
-        [StringLength(45)]
-        public string Tipo { get; set; }
+    public string Tipo { get; set; } = null!;
 
-        [Required]
-        [Column(TypeName = "decimal(10,2)")]
-        public decimal Valor { get; set; }
+    public decimal Valor { get; set; }
 
-        [Required]
-        [Column("DATA_REGISTRO", TypeName = "DATE")] // Alinhado com o PostgreSQL
-        public DateTime DataRegistro { get; set; }
+    public DateOnly DataRegistro { get; set; }
 
-        [Required]
-        [Column("CONTADOR_FUNCIONARIO_idFUNCIONARIO")] // Nome da coluna corrigido
-        public int ContadorFuncionarioId { get; set; }
+    public int ContadorFuncionarioIdfuncionario { get; set; }
 
-        [ForeignKey("ContadorFuncionarioId")]
-        public virtual Contador Contador { get; set; }
-    }
+    public virtual Contador ContadorFuncionarioIdfuncionarioNavigation { get; set; } = null!;
 }

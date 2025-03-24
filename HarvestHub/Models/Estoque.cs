@@ -1,31 +1,17 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
-namespace HarvestHub.Models
+namespace HarvestHub.Models;
+
+public partial class Estoque
 {
-    [Table("ESTOQUE")]
-    public class Estoque
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("idLOCAL")]
-        public int IdLocal { get; set; }
+    public int Idlocal { get; set; }
 
-        [Required]
-        [StringLength(45)]
-        [Column("NOME")]
-        public required string Nome { get; set; }
+    public string Nome { get; set; } = null!;
 
-        [Required]
-        [StringLength(45)]
-        [Column("LOCAL")]
-        public required string Local { get; set; }
+    public string Local { get; set; } = null!;
 
-        [Required]
-        [Column("INSUMO_idINSUMO")] // Nome da coluna igual ao script
-        public int InsumoId { get; set; }
+    public int InsumoIdinsumo { get; set; }
 
-        [ForeignKey("InsumoId")]
-        public virtual Insumo Insumo { get; set; }
-    }
+    public virtual Insumo InsumoIdinsumoNavigation { get; set; } = null!;
 }
