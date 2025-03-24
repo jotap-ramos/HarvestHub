@@ -1,4 +1,7 @@
-﻿namespace HarvestHub.Models;
+using System;
+using System.Collections.Generic;
+
+namespace HarvestHub.Models;
 
 public class Fornecedor
 {

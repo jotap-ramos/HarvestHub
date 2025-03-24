@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace HarvestHub.Models
 {
@@ -31,6 +32,8 @@ namespace HarvestHub.Models
 
         [Required, MaxLength(45)]
         public required string Marca { get; set; } = "";
+
+        public required ICollection<Estoque> Estoques { get; set; } = new List<Estoque>();
 
         [Required]
         [StringLength(9)]
