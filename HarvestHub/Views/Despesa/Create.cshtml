@@ -1,0 +1,34 @@
+@model HarvestHub.Models.Despesa
+
+@{
+    ViewData["Title"] = "Cadastrar Despesa";
+}
+
+<h2>Cadastrar Despesa</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Tipo"></label>
+        <input asp-for="Tipo" class="form-control" />
+        <span asp-validation-for="Tipo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Valor"></label>
+        <input asp-for="Valor" class="form-control" />
+        <span asp-validation-for="Valor" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DataPagamento"></label>
+        <input asp-for="DataPagamento" type="date" class="form-control" />
+        <span asp-validation-for="DataPagamento" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
