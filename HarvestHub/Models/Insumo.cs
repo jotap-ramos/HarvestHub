@@ -22,6 +22,8 @@ namespace HarvestHub.Models
         public string Volume { get; set; }  = "";
 
         [Required]
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "DECIMAL(10, 2)")]
         public decimal Custo { get; set; }
 
         [StringLength(100)]
