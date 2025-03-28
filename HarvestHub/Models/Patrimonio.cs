@@ -19,7 +19,7 @@ namespace HarvestHub.Models
         [Required]
         public DateOnly DataAquisicao { get; set; }
         
-        public string GerenteDeProducaoCrea { get; set; }
-        public GerenteDeProducao GerenteDeProducao { get; set; }
+        public required string GerenteDeProducaoCrea { get; set; }
+        public required GerenteDeProducao GerenteDeProducao { get; set; }
     }
 }

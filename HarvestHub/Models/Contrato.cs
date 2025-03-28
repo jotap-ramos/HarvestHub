@@ -9,7 +9,7 @@ namespace HarvestHub.Models
         [Key]
         public int Id { get; set; }
         [Required, MaxLength(20)]
-        public string Telefone { get; set; }
+        public required string Telefone { get; set; }
         [Required]
         [StringLength(11)]
         public string? NumeroContrato { get; set; }
@@ -20,7 +20,7 @@ namespace HarvestHub.Models
         public decimal ValorTotal { get; set; }
         
         public int FuncionarioId { get; set; }
-        public Funcionario Funcionario { get; set; }
+        public required Funcionario Funcionario { get; set; }
         public int FornecedorId { get; set; }
         public Fornecedor? Fornecedor { get; set; }
     }

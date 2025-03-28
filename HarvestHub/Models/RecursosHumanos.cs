@@ -7,6 +7,6 @@ public class RecursosHumanos
     [Key]
     public int FuncionarioId { get; set; }
     [Required, MaxLength(50)]
-    public string CRA { get; set; }
-    public Funcionario Funcionario { get; set; }
+    public required string CRA { get; set; }
+    public required Funcionario Funcionario { get; set; }
 }
