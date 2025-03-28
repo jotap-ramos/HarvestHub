@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HarvestHub.Models;
 
@@ -13,6 +14,8 @@ public class Insumo
     [Required, MaxLength(45)]
     public required string Volume { get; set; }
     [Required]
+    [DataType(DataType.Currency)]
+    [Column(TypeName = "DECIMAL(10, 2)")]
     public decimal Custo { get; set; }
     [MaxLength(100)]
     public string? Descricao { get; set; }

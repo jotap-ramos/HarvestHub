@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using MvcFuncionario.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<MvcFuncionarioContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("MvcFuncionarioContext") ?? throw new InvalidOperationException("Connection string 'MvcFuncionarioContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

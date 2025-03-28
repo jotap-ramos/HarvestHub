@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HarvestHub.Models;
 
@@ -9,13 +10,25 @@ public class Funcionario
     [Required, MaxLength(45)]
     public required string Nome { get; set; }
     [Required]
+    [DataType(DataType.Currency)]
+    [Column(TypeName = "DECIMAL(10, 2)")]
     public decimal Salario { get; set; }
-    [Required]
-    public DateTime DataAdmissao { get; set; }
+    private DateTime _dataAdmissao;
+    [Required, DataType(DataType.Date), Column(TypeName = "date")]
+    public required DateTime DataAdmissao
+    {
+        get => _dataAdmissao;
+        set => _dataAdmissao = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+    }
     [Required, MaxLength(11)]
     public required string CPF { get; set; }
-    [Required]
-    public DateTime DataNascimento { get; set; }
+    private DateTime _dataNascimento;
+    [Required, DataType(DataType.Date), Column(TypeName = "date")]
+    public required DateTime DataNascimento
+    {
+        get => _dataNascimento;
+        set => _dataNascimento = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+    }
     [Required]
     public short Status { get; set; }
 
