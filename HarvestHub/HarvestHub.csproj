@@ -22,4 +22,12 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Funcionario\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Funcionario\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Funcionario\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Funcionario\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Funcionario\Index.cshtml" />
+  </ItemGroup>
+
 </Project>

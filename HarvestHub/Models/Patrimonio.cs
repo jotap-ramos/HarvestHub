@@ -11,10 +11,15 @@ namespace HarvestHub.Models
         public string? Nome { get; set; }
         [Required]
         public string? Categoria { get; set; }
+        
         [Required]
         [DataType(DataType.Currency)]
-        public double Valor { get; set; }
+        public decimal Valor { get; set; }
+        
+        [Required]
         public DateOnly DataAquisicao { get; set; }
-
+        
+        public string GerenteDeProducaoCrea { get; set; }
+        public GerenteDeProducao GerenteDeProducao { get; set; }
     }
 }

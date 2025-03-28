@@ -34,5 +34,6 @@ namespace HarvestHub.Models
         [Required]
         [StringLength(9)]
         public string GerenteDeProducaoCrea { get; set; } = "";
+        public GerenteDeProducao GerenteDeProducao { get; set; }
     }
 }
