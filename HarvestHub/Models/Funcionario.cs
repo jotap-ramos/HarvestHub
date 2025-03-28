@@ -7,13 +7,13 @@ public class Funcionario
     [Key]
     public int Id { get; set; }
     [Required, MaxLength(45)]
-    public string Nome { get; set; }
+    public required string Nome { get; set; }
     [Required]
     public decimal Salario { get; set; }
     [Required]
     public DateTime DataAdmissao { get; set; }
     [Required, MaxLength(11)]
-    public string CPF { get; set; }
+    public required string CPF { get; set; }
     [Required]
     public DateTime DataNascimento { get; set; }
     [Required]
