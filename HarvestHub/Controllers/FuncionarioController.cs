@@ -2,27 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HarvestHub.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HarvestHub.Models;
-using MvcFuncionario.Data;
 
 namespace HarvestHub.Controllers
 {
-    public class FuncionarioController : Controller
+    public class FuncionarioController(ApplicationContext context) : Controller
     {
-        private readonly MvcFuncionarioContext _context;
-
-        public FuncionarioController(MvcFuncionarioContext context)
-        {
-            _context = context;
-        }
-
         // GET: Funcionario
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Funcionario.ToListAsync());
+            return View(await context.Funcionario.ToListAsync());
         }
 
         // GET: Funcionario/Details/5
@@ -33,7 +26,7 @@ namespace HarvestHub.Controllers
                 return NotFound();
             }
 
-            var funcionario = await _context.Funcionario
+            var funcionario = await context.Funcionario
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (funcionario == null)
             {
@@ -58,8 +51,8 @@ namespace HarvestHub.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(funcionario);
-                await _context.SaveChangesAsync();
+                context.Add(funcionario);
+                await context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(funcionario);
@@ -73,7 +66,7 @@ namespace HarvestHub.Controllers
                 return NotFound();
             }
 
-            var funcionario = await _context.Funcionario.FindAsync(id);
+            var funcionario = await context.Funcionario.FindAsync(id);
             if (funcionario == null)
             {
                 return NotFound();
@@ -97,8 +90,8 @@ namespace HarvestHub.Controllers
             {
                 try
                 {
-                    _context.Update(funcionario);
-                    await _context.SaveChangesAsync();
+                    context.Update(funcionario);
+                    await context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -124,7 +117,7 @@ namespace HarvestHub.Controllers
                 return NotFound();
             }
 
-            var funcionario = await _context.Funcionario
+            var funcionario = await context.Funcionario
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (funcionario == null)
             {
@@ -139,19 +132,19 @@ namespace HarvestHub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var funcionario = await _context.Funcionario.FindAsync(id);
+            var funcionario = await context.Funcionario.FindAsync(id);
             if (funcionario != null)
             {
-                _context.Funcionario.Remove(funcionario);
+                context.Funcionario.Remove(funcionario);
             }
 
-            await _context.SaveChangesAsync();
+            await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool FuncionarioExists(int id)
         {
-            return _context.Funcionario.Any(e => e.Id == id);
+            return context.Funcionario.Any(e => e.Id == id);
         }
     }
 }

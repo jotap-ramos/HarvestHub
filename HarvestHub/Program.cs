@@ -1,9 +1,10 @@
+using HarvestHub.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using MvcFuncionario.Data;
+
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<MvcFuncionarioContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("MvcFuncionarioContext") ?? throw new InvalidOperationException("Connection string 'MvcFuncionarioContext' not found.")));
+builder.Services.AddDbContext<ApplicationContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
