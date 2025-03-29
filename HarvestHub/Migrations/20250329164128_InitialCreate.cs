@@ -19,10 +19,10 @@ namespace HarvestHub.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Nome = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: false),
-                    Salario = table.Column<decimal>(type: "numeric", nullable: false),
-                    DataAdmissao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Salario = table.Column<decimal>(type: "numeric(10,2)", nullable: false),
+                    DataAdmissao = table.Column<DateTime>(type: "date", nullable: false),
                     CPF = table.Column<string>(type: "character varying(11)", maxLength: 11, nullable: false),
-                    DataNascimento = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    DataNascimento = table.Column<DateTime>(type: "date", nullable: false),
                     Status = table.Column<short>(type: "smallint", nullable: false)
                 },
                 constraints: table =>
@@ -55,7 +55,7 @@ namespace HarvestHub.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Telefone = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    DataInicio = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    DataInicio = table.Column<DateTime>(type: "date", nullable: false),
                     FuncionarioId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -112,8 +112,8 @@ namespace HarvestHub.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Tipo = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: false),
-                    Valor = table.Column<decimal>(type: "numeric", nullable: false),
-                    DataRegistro = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Valor = table.Column<decimal>(type: "numeric(10,2)", nullable: false),
+                    DataRegistro = table.Column<DateTime>(type: "date", nullable: false),
                     ContadorFuncionarioId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -136,7 +136,7 @@ namespace HarvestHub.Migrations
                     Tipo = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: false),
                     Codigo = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: false),
                     Volume = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: false),
-                    Custo = table.Column<decimal>(type: "numeric", nullable: false),
+                    Custo = table.Column<decimal>(type: "numeric(10,2)", nullable: false),
                     Descricao = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     Marca = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: false),
                     GerenteDeProducaoCrea = table.Column<string>(type: "text", nullable: false),
@@ -159,8 +159,8 @@ namespace HarvestHub.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Valor = table.Column<decimal>(type: "numeric", nullable: false),
-                    DataAquisicao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Valor = table.Column<decimal>(type: "numeric(10,2)", nullable: false),
+                    DataAquisicao = table.Column<DateTime>(type: "date", nullable: false),
                     GerenteDeProducaoCrea = table.Column<string>(type: "text", nullable: false),
                     GerenteDeProducaoFuncionarioId = table.Column<int>(type: "integer", nullable: false)
                 },
