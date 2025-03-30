@@ -1,12 +1,8 @@
-
 using HarvestHub.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))); // Se for PostgreSQL
-
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -32,6 +28,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=GerenciarBalanco}/{action=Create}/");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

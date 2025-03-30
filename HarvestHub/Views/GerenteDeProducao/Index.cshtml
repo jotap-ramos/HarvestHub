@@ -1,0 +1,70 @@
+@model IEnumerable<HarvestHub.Models.GerenteDeProducao>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Funcionario.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Funcionario.Salario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Funcionario.DataAdmissao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Funcionario.CPF)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Funcionario.DataNascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Funcionario.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CREA)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Funcionario.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Funcionario.Salario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Funcionario.DataAdmissao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Funcionario.CPF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Funcionario.DataNascimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Funcionario.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CREA)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Funcionario.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Funcionario.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Funcionario.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

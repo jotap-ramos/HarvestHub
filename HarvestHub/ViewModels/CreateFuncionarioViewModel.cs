@@ -1,13 +1,11 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HarvestHub.Models;
+namespace HarvestHub.ViewModels;
 
-public class Funcionario
+public class CreateFuncionarioViewModel
 {
-    [Key]
-    public int Id { get; set; }
     [Required, MaxLength(45)]
     public required string Nome { get; set; }
     [Required]
@@ -32,9 +30,4 @@ public class Funcionario
     }
     [Required]
     public short Status { get; set; }
-
-    public GerenteDeProducao? GerenteDeProducao { get; set; }
-    public RecursosHumanos? RecursosHumanos { get; set; }
-    public Contador? Contador { get; set; }
-    public required ICollection<Contrato> Contratos { get; set; }
 }

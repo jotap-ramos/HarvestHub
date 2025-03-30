@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace HarvestHub.Models;
 
-public partial class GerenteDeProducao
+public class GerenteDeProducao
 {
-    public string Crea { get; set; } = null!;
-
-    public int FuncionarioIdfuncionario { get; set; }
-
-    public virtual Funcionario FuncionarioIdfuncionarioNavigation { get; set; } = null!;
-
-    public virtual ICollection<Insumo> Insumos { get; set; } = new List<Insumo>();
-
-    public virtual ICollection<Patrimonio> Patrimonios { get; set; } = new List<Patrimonio>();
+    [Key]
+    public int FuncionarioId { get; set; }
+    [Required, MaxLength(9)]
+    public required string CREA { get; set; }
+    public required Funcionario Funcionario { get; set; }
+    public required ICollection<Patrimonio> Patrimonios { get; set; }
+    public required ICollection<Insumo> Insumos { get; set; }
 }

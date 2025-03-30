@@ -1,38 +1,26 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HarvestHub.Models
+namespace HarvestHub.Models;
+
+public class Insumo
 {
-    [Table("INSUMO")]
-    public class Insumo
-    {
-        [Key]
-        public int IdInsumo { get; set; }
-
-        [Required]
-        [StringLength(45)]
-        public string TipoInsumo { get; set; }  = "";
-
-        [Required]
-        [StringLength(45)]
-        public string CodInsumo { get; set; }  = "";
-
-        [Required]
-        [StringLength(45)]
-        public string Volume { get; set; }  = "";
-
-        [Required]
-        public decimal Custo { get; set; }
-
-        [StringLength(100)]
-        public string? Descricao { get; set; }
-
-        [Required]
-        [StringLength(45)]
-        public string Marca { get; set; } = "";
-
-        [Required]
-        [StringLength(9)]
-        public string GerenteDeProducaoCrea { get; set; } = "";
-    }
+    [Key]
+    public int Id { get; set; }
+    [Required, MaxLength(45)]
+    public required string Tipo { get; set; }
+    [Required, MaxLength(45)]
+    public required string Codigo { get; set; }
+    [Required, MaxLength(45)]
+    public required string Volume { get; set; }
+    [Required]
+    [DataType(DataType.Currency)]
+    [Column(TypeName = "DECIMAL(10, 2)")]
+    public decimal Custo { get; set; }
+    [MaxLength(100)]
+    public string? Descricao { get; set; }
+    [Required, MaxLength(45)]
+    public required string Marca { get; set; }
+    public required string GerenteDeProducaoCrea { get; set; }
+    public required GerenteDeProducao GerenteDeProducao { get; set; }
 }

@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace HarvestHub.Models;
 
-public partial class RecursosHumanos
+public class RecursosHumanos
 {
-    public int FuncionarioIdfuncionario { get; set; }
-
-    public string Cra { get; set; } = null!;
-
-    public virtual Funcionario FuncionarioIdfuncionarioNavigation { get; set; } = null!;
+    [Key]
+    public int FuncionarioId { get; set; }
+    [Required, MaxLength(50)]
+    public required string CRA { get; set; }
+    public required Funcionario Funcionario { get; set; }
 }

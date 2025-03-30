@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace HarvestHub.Models;
 
-public partial class Contador
+public class Contador
 {
     public string Crc { get; set; } = null!;
 
