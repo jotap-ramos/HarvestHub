@@ -1,0 +1,25 @@
+﻿@model HarvestHub.Models.Fornecedor
+@{
+	ViewData["Title"] = "Edit";
+}
+<h3>Edite o fornecedor selecionado</h3>
+
+<form asp-action="Edit" method="post">
+	<div class="form-group">
+		<label for="Nome">Nome</label>
+		<input type="text" class="form-control" asp-for="Nome" />
+	</div>
+	<div class="form-group">
+		<label for="CNPJ">CNPJ</label>
+		<input type="text" class="form-control" asp-for="CNPJ" />
+	</div>
+	<div class="form-group">
+		<label for="Telefone">Telefone</label>
+		<input type="text" class="form-control" asp-for="Telefone" />
+	</div>
+	<div class="form-group">
+		<label for="Email">Email</label>
+		<input type="text" class="form-control" asp-for="Email" />
+	</div>
+	<button type="submit" class="btn btn-primary">Submit</button>
+</form>
