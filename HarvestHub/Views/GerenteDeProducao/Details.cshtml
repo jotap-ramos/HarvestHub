@@ -53,6 +53,67 @@
             @Html.DisplayFor(model => model.CREA)
         </dd>
     </dl>
+    <hr />
+    <dt class = "col-sm-2">
+        @Html.DisplayNameFor(model => model.Funcionario.Contratos)
+    </dt>
+    <tbody>
+    @foreach (var contrato in Model.Funcionario.Contratos)
+    {
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => contrato.DataInicio)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => contrato.Telefone)
+            </td>
+        </tr>
+    }
+    </tbody>
+
+    <hr />
+    <dt class = "col-sm-2">
+        @Html.DisplayNameFor(model => model.Patrimonios)
+    </dt>
+    <tbody>
+    @foreach (var patrimonio in Model.Patrimonios)
+    {
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => patrimonio.DataAquisicao)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => patrimonio.Valor)
+            </td>
+        </tr>
+    }
+    </tbody>
+    <hr />
+    <dt class = "col-sm-2">
+        @Html.DisplayNameFor(model => model.Insumos)
+    </dt>
+    <tbody>
+    @foreach (var insumo in Model.Insumos)
+    {
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => insumo.Codigo)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => insumo.Marca)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => insumo.Tipo)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => insumo.Volume)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => insumo.Custo)
+            </td>
+        </tr>
+    }
+    </tbody>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Funcionario.Id">Edit</a> |

@@ -9,6 +9,6 @@ public class GerenteDeProducao
     [Required, MaxLength(9)]
     public required string CREA { get; set; }
     public required Funcionario Funcionario { get; set; }
-    public ICollection<Patrimonio>? Patrimonios { get; set; }
-    public ICollection<Insumo>? Insumos { get; set; }
+    public required ICollection<Patrimonio> Patrimonios { get; set; }
+    public required ICollection<Insumo> Insumos { get; set; }
 }

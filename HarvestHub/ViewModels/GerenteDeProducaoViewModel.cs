@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,13 +15,13 @@ namespace HarvestHub.ViewModels
         [Required, DataType(DataType.Currency), Column(TypeName = "decimal(10, 2)")]
         public decimal Salario { get; set; }
 
-        [Required, DataType(DataType.Date)]
+        [Required, DataType(DataType.Date), DisplayName("Data de Admissao")]
         public DateTime DataAdmissao { get; set; }
 
         [Required, MaxLength(11)]
         public required string CPF { get; set; }
 
-        [Required, DataType(DataType.Date)]
+        [Required, DataType(DataType.Date), DisplayName("Data de Nascimento")]
         public DateTime DataNascimento { get; set; }
 
         [Required]

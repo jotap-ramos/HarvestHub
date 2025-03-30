@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,7 +15,7 @@ namespace HarvestHub.Models
         public string? NumeroContrato { get; set; }
         
         private DateTime _dataInicio;
-        [Required, DataType(DataType.Date), Column(TypeName = "date")]
+        [Required, DataType(DataType.Date), Column(TypeName = "date"), DisplayName("Data de Inicio")]
         public DateTime DataInicio
         {
             get => _dataInicio;
@@ -22,7 +23,7 @@ namespace HarvestHub.Models
         }
 
         private DateTime _dataFim;
-        [Required, DataType(DataType.Date), Column(TypeName = "date")]
+        [Required, DataType(DataType.Date), Column(TypeName = "date"), DisplayName("Data de Fim")]
         public DateTime DataFim
         {
             get => _dataFim; 

@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,7 +20,7 @@ namespace HarvestHub.Models
         public decimal Valor { get; set; }
         
         private DateTime _dataAquisicao;
-        [Required, DataType(DataType.Date), Column(TypeName = "date")]
+        [Required, DataType(DataType.Date), Column(TypeName = "date"), DisplayName("Data de Aquisicao")]
         public DateTime DataAquisicao
         {
             get => _dataAquisicao;

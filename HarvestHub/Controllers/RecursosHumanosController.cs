@@ -26,6 +26,7 @@ namespace HarvestHub.Controllers
 
             var rh = await context.RecursosHumanos
                 .Include(rh => rh.Funcionario)
+                .Include(rh => rh.Funcionario.Contratos)
                 .FirstOrDefaultAsync(m => m.Funcionario.Id == id);
 
             return rh == null ? NotFound() : View(rh);
@@ -46,7 +47,8 @@ namespace HarvestHub.Controllers
                     DataAdmissao = DateTime.SpecifyKind(viewmodel.DataAdmissao, DateTimeKind.Utc),
                     CPF = viewmodel.CPF,
                     DataNascimento = DateTime.SpecifyKind(viewmodel.DataNascimento, DateTimeKind.Utc),
-                    Status = viewmodel.Status
+                    Status = viewmodel.Status,
+                    Contratos = new List<Contrato>()
                 };
 
                 context.Funcionario.Add(funcionario);

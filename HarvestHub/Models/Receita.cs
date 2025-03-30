@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,7 +15,7 @@ public class Receita
     [Column(TypeName = "DECIMAL(10, 2)")]
     public decimal Valor { get; set; }
     private DateTime _dataRegistro;
-    [Required, DataType(DataType.Date), Column(TypeName = "date")]
+    [Required, DataType(DataType.Date), Column(TypeName = "date"), DisplayName("Data de Registro")]
     public DateTime DataRegistro
     {
         get => _dataRegistro;

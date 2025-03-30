@@ -47,6 +47,23 @@
             @Html.DisplayFor(model => model.Status)
         </dd>
     </dl>
+    <hr />
+    <dt class = "col-sm-2">
+        @Html.DisplayNameFor(model => model.Contratos)
+    </dt>
+    <tbody>
+    @foreach (var contrato in Model.Contratos)
+    {
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => contrato.DataInicio)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => contrato.Telefone)
+            </td>
+        </tr>
+    }
+    </tbody>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
