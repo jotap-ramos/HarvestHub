@@ -37,7 +37,7 @@ public partial class HarvesthubContext : DbContext
 
     public virtual DbSet<Receita> Receitas { get; set; }
 
-    public virtual DbSet<RecursosHumanoss> RecursosHumanosses { get; set; }
+    public virtual DbSet<RecursosHumanos> RecursosHumanos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -305,7 +305,7 @@ public partial class HarvesthubContext : DbContext
                 .HasConstraintName("fk_receita_contador");
         });
 
-        modelBuilder.Entity<RecursosHumanoss>(entity =>
+        modelBuilder.Entity<RecursosHumanos>(entity =>
         {
             entity.HasKey(e => e.FuncionarioIdfuncionario).HasName("recursos_humanos_pkey");
 
@@ -320,8 +320,8 @@ public partial class HarvesthubContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("cra");
 
-            entity.HasOne(d => d.FuncionarioIdfuncionarioNavigation).WithOne(p => p.RecursosHumanoss)
-                .HasForeignKey<RecursosHumanoss>(d => d.FuncionarioIdfuncionario)
+            entity.HasOne(d => d.FuncionarioIdfuncionarioNavigation).WithOne(p => p.RecursosHumanos)
+                .HasForeignKey<RecursosHumanos>(d => d.FuncionarioIdfuncionario)
                 .HasConstraintName("fk_rh_funcionario");
         });
 

@@ -18,7 +18,11 @@ namespace HarvestHub.Controllers
         // Ação para exibir o formulário (GET)
         public IActionResult Create()
         {
-            return View();
+            var model = new Despesa
+            {
+                DataRegistro = DateOnly.FromDateTime(DateTime.Today)
+            };
+            return View("~/Views/Despesa/Create.cshtml");
         }
         
         [HttpPost]
@@ -29,8 +33,9 @@ namespace HarvestHub.Controllers
             {
                 try
                 {
-                   
-                    
+                    _context.Despesas.Add(despesa);
+                    await _context.SaveChangesAsync();
+
                     TempData["Success"] = "Despesa cadastrada com sucesso!";
                     return RedirectToAction(nameof(Create));
                 }
@@ -40,7 +45,7 @@ namespace HarvestHub.Controllers
                     ModelState.AddModelError("", $"Erro ao salvar: {ex.Message}");
                 }
             }
-            return View(despesa);
+            return View("~/Views/Despesa/Create.cshtml", despesa);
         }
     }
 }

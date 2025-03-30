@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HarvestHub.Models;
 
-public partial class RecursosHumanoss
+public partial class RecursosHumanos
 {
     public int FuncionarioIdfuncionario { get; set; }
 

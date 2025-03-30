@@ -25,5 +25,5 @@ public partial class Funcionario
 
     public virtual GerenteDeProducao? GerenteDeProducao { get; set; }
 
-    public virtual RecursosHumanoss? RecursosHumanoss { get; set; }
+    public virtual RecursosHumanos? RecursosHumanos { get; set; }
 }
