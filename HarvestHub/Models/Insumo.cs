@@ -1,27 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HarvestHub.Models;
-
-public partial class Insumo
+namespace HarvestHub.Models
 {
-    public int Idinsumo { get; set; }
+    [Table("INSUMO")]
+    public class Insumo
+    {
+        [Key]
+        public int IdInsumo { get; set; }
 
-    public string TipoInsumo { get; set; } = null!;
+        [Required]
+        [StringLength(45)]
+        public string TipoInsumo { get; set; }  = "";
 
-    public string CodInsumo { get; set; } = null!;
+        [Required]
+        [StringLength(45)]
+        public string CodInsumo { get; set; }  = "";
 
-    public string Volume { get; set; } = null!;
+        [Required]
+        [StringLength(45)]
+        public string Volume { get; set; }  = "";
 
-    public decimal Custo { get; set; }
+        [Required]
+        public decimal Custo { get; set; }
 
-    public string? Descricao { get; set; }
+        [StringLength(100)]
+        public string? Descricao { get; set; }
 
-    public string Marca { get; set; } = null!;
+        [Required]
+        [StringLength(45)]
+        public string Marca { get; set; } = "";
 
-    public string GerenteDeProducaoCrea { get; set; } = null!;
-
-    public virtual ICollection<Estoque> Estoques { get; set; } = new List<Estoque>();
-
-    public virtual GerenteDeProducao GerenteDeProducaoCreaNavigation { get; set; } = null!;
+        [Required]
+        [StringLength(9)]
+        public string GerenteDeProducaoCrea { get; set; } = "";
+    }
 }

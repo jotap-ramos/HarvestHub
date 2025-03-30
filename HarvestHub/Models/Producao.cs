@@ -1,15 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HarvestHub.Models;
-
-public partial class Producao
+namespace HarvestHub.Models
 {
-    public int Idproducao { get; set; }
+    [Table("PRODUCAO")]
+    public class Producao
+    {
+        [Key]
+        public int IdProducao { get; set; }
 
-    public string Tipo { get; set; } = null!;
+        [Required]
+        [StringLength(20)]
+        public string Tipo { get; set; } = "";
 
-    public decimal Custo { get; set; }
+        [Required]
+        public decimal Custo { get; set; }
 
-    public string Volume { get; set; } = null!;
+        [Required]
+        [StringLength(20)]
+        public string Volume { get; set; }  = "";
+    }
 }
