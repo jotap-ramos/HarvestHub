@@ -1,0 +1,32 @@
+﻿@model List<HarvestHub.Models.Patrimonio>
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h3>Patrimônios cadastrados</h3>
+<a asp-action="Create" method="post">Novo</a>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Nome</th>
+			<th>Categoria</th>
+			<th>Valor</th>
+			<th>DataAquisicao</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var patrimonio in Model)
+		{
+			<tr>
+				<td>@patrimonio.Nome</td>
+				<td>@patrimonio.Categoria</td>
+				<td>R$ @patrimonio.Valor.ToString("N2")</td>
+				<td>@patrimonio.DataAquisicao</td>
+				<td> 
+					<a asp-action="Edit" asp-route-id="@patrimonio.Id">Editar</a> 
+					<a asp-action="Delete" asp-route-id="@patrimonio.Id">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

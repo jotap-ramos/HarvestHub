@@ -1,0 +1,15 @@
+﻿@model HarvestHub.Models.Patrimonio
+@{
+	ViewData["Title"] = "Delete";
+}
+<h3>Tem certeza que deseja deletar o patrimônio selecionado?</h3>
+
+<p>@Model.Nome</p>
+<p>@Model.Categoria</p>
+<p>@Model.Valor</p>
+<p>@Model.DataAquisicao</p>
+
+<form asp-action="Delete" method="post">
+	<input type="hidden" asp-for="Id"/>
+	<input type="submit" class="btn btn-danger" value="Delete"/>
+</form>
