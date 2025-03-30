@@ -199,13 +199,13 @@ public partial class HarvesthubContext : DbContext
 
         modelBuilder.Entity<Insumo>(entity =>
         {
-            entity.HasKey(e => e.Idinsumo).HasName("insumo_pkey");
+            entity.HasKey(e => e.IdInsumo).HasName("insumo_pkey");
 
             entity.ToTable("insumos", "harvesthub");
 
             entity.HasIndex(e => e.CodInsumo, "insumo_cod_insumo_key").IsUnique();
 
-            entity.Property(e => e.Idinsumo)
+            entity.Property(e => e.IdInsumo)
                 .HasDefaultValueSql("nextval('harvesthub.insumo_idinsumo_seq'::regclass)")
                 .HasColumnName("idinsumo");
             entity.Property(e => e.CodInsumo)
@@ -263,11 +263,11 @@ public partial class HarvesthubContext : DbContext
 
         modelBuilder.Entity<Producao>(entity =>
         {
-            entity.HasKey(e => e.Idproducao).HasName("producao_pkey");
+            entity.HasKey(e => e.IdProducao).HasName("producao_pkey");
 
             entity.ToTable("producaos", "harvesthub");
 
-            entity.Property(e => e.Idproducao)
+            entity.Property(e => e.IdProducao)
                 .HasDefaultValueSql("nextval('harvesthub.producao_idproducao_seq'::regclass)")
                 .HasColumnName("idproducao");
             entity.Property(e => e.Custo)
