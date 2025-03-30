@@ -22,6 +22,21 @@ namespace HarvestHub.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("HarvestHub.Models.Contador", b =>
+                {
+                    b.Property<int>("FuncionarioId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CRC")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("character varying(15)");
+
+                    b.HasKey("FuncionarioId");
+
+                    b.ToTable("Contador");
+                });
+
             modelBuilder.Entity("HarvestHub.Models.Contrato", b =>
                 {
                     b.Property<int>("Id")
@@ -31,12 +46,15 @@ namespace HarvestHub.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DataFim")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("date");
 
                     b.Property<DateTime>("DataInicio")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("date");
 
                     b.Property<int>("FornecedorId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("FuncionarioId")
                         .HasColumnType("integer");
 
                     b.Property<string>("NumeroContrato")
@@ -44,12 +62,19 @@ namespace HarvestHub.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("character varying(11)");
 
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
                     b.Property<decimal>("ValorTotal")
                         .HasColumnType("numeric");
 
                     b.HasKey("Id");
 
                     b.HasIndex("FornecedorId");
+
+                    b.HasIndex("FuncionarioId");
 
                     b.ToTable("Contratos");
                 });
@@ -79,6 +104,56 @@ namespace HarvestHub.Migrations
                     b.ToTable("Fornecedores");
                 });
 
+            modelBuilder.Entity("HarvestHub.Models.Funcionario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CPF")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("character varying(11)");
+
+                    b.Property<DateTime>("DataAdmissao")
+                        .HasColumnType("date");
+
+                    b.Property<DateTime>("DataNascimento")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(45)
+                        .HasColumnType("character varying(45)");
+
+                    b.Property<decimal>("Salario")
+                        .HasColumnType("DECIMAL(10, 2)");
+
+                    b.Property<short>("Status")
+                        .HasColumnType("smallint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Funcionario");
+                });
+
+            modelBuilder.Entity("HarvestHub.Models.GerenteDeProducao", b =>
+                {
+                    b.Property<int>("FuncionarioId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CREA")
+                        .IsRequired()
+                        .HasMaxLength(9)
+                        .HasColumnType("character varying(9)");
+
+                    b.HasKey("FuncionarioId");
+
+                    b.ToTable("GerenteDeProducao");
+                });
+
             modelBuilder.Entity("HarvestHub.Models.Insumo", b =>
                 {
                     b.Property<int>("IdInsumo")
@@ -93,7 +168,7 @@ namespace HarvestHub.Migrations
                         .HasColumnType("character varying(45)");
 
                     b.Property<decimal>("Custo")
-                        .HasColumnType("numeric");
+                        .HasColumnType("DECIMAL(10, 2)");
 
                     b.Property<string>("Descricao")
                         .HasMaxLength(100)
@@ -103,6 +178,9 @@ namespace HarvestHub.Migrations
                         .IsRequired()
                         .HasMaxLength(9)
                         .HasColumnType("character varying(9)");
+
+                    b.Property<int>("GerenteDeProducaoFuncionarioId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Marca")
                         .IsRequired()
@@ -121,6 +199,8 @@ namespace HarvestHub.Migrations
 
                     b.HasKey("IdInsumo");
 
+                    b.HasIndex("GerenteDeProducaoFuncionarioId");
+
                     b.ToTable("INSUMO");
                 });
 
@@ -136,18 +216,27 @@ namespace HarvestHub.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateOnly>("DataAquisicao")
+                    b.Property<DateTime>("DataAquisicao")
                         .HasColumnType("date");
+
+                    b.Property<string>("GerenteDeProducaoCrea")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("GerenteDeProducaoFuncionarioId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<double>("Valor")
-                        .HasColumnType("double precision");
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(10, 2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GerenteDeProducaoFuncionarioId");
 
                     b.ToTable("Patrimonios");
                 });
@@ -178,6 +267,61 @@ namespace HarvestHub.Migrations
                     b.ToTable("PRODUCAO");
                 });
 
+            modelBuilder.Entity("HarvestHub.Models.Receita", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ContadorFuncionarioId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("DataRegistro")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasMaxLength(45)
+                        .HasColumnType("character varying(45)");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("DECIMAL(10, 2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContadorFuncionarioId");
+
+                    b.ToTable("Receita");
+                });
+
+            modelBuilder.Entity("HarvestHub.Models.RecursosHumanos", b =>
+                {
+                    b.Property<int>("FuncionarioId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CRA")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.HasKey("FuncionarioId");
+
+                    b.ToTable("RecursosHumanos");
+                });
+
+            modelBuilder.Entity("HarvestHub.Models.Contador", b =>
+                {
+                    b.HasOne("HarvestHub.Models.Funcionario", "Funcionario")
+                        .WithOne("Contador")
+                        .HasForeignKey("HarvestHub.Models.Contador", "FuncionarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Funcionario");
+                });
+
             modelBuilder.Entity("HarvestHub.Models.Contrato", b =>
                 {
                     b.HasOne("HarvestHub.Models.Fornecedor", "Fornecedor")
@@ -186,12 +330,98 @@ namespace HarvestHub.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("HarvestHub.Models.Funcionario", "Funcionario")
+                        .WithMany("Contratos")
+                        .HasForeignKey("FuncionarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Fornecedor");
+
+                    b.Navigation("Funcionario");
+                });
+
+            modelBuilder.Entity("HarvestHub.Models.GerenteDeProducao", b =>
+                {
+                    b.HasOne("HarvestHub.Models.Funcionario", "Funcionario")
+                        .WithOne("GerenteDeProducao")
+                        .HasForeignKey("HarvestHub.Models.GerenteDeProducao", "FuncionarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Funcionario");
+                });
+
+            modelBuilder.Entity("HarvestHub.Models.Insumo", b =>
+                {
+                    b.HasOne("HarvestHub.Models.GerenteDeProducao", "GerenteDeProducao")
+                        .WithMany("Insumos")
+                        .HasForeignKey("GerenteDeProducaoFuncionarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GerenteDeProducao");
+                });
+
+            modelBuilder.Entity("HarvestHub.Models.Patrimonio", b =>
+                {
+                    b.HasOne("HarvestHub.Models.GerenteDeProducao", "GerenteDeProducao")
+                        .WithMany("Patrimonios")
+                        .HasForeignKey("GerenteDeProducaoFuncionarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GerenteDeProducao");
+                });
+
+            modelBuilder.Entity("HarvestHub.Models.Receita", b =>
+                {
+                    b.HasOne("HarvestHub.Models.Contador", "Contador")
+                        .WithMany("Receitas")
+                        .HasForeignKey("ContadorFuncionarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Contador");
+                });
+
+            modelBuilder.Entity("HarvestHub.Models.RecursosHumanos", b =>
+                {
+                    b.HasOne("HarvestHub.Models.Funcionario", "Funcionario")
+                        .WithOne("RecursosHumanos")
+                        .HasForeignKey("HarvestHub.Models.RecursosHumanos", "FuncionarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Funcionario");
+                });
+
+            modelBuilder.Entity("HarvestHub.Models.Contador", b =>
+                {
+                    b.Navigation("Receitas");
                 });
 
             modelBuilder.Entity("HarvestHub.Models.Fornecedor", b =>
                 {
                     b.Navigation("Contratos");
+                });
+
+            modelBuilder.Entity("HarvestHub.Models.Funcionario", b =>
+                {
+                    b.Navigation("Contador");
+
+                    b.Navigation("Contratos");
+
+                    b.Navigation("GerenteDeProducao");
+
+                    b.Navigation("RecursosHumanos");
+                });
+
+            modelBuilder.Entity("HarvestHub.Models.GerenteDeProducao", b =>
+                {
+                    b.Navigation("Insumos");
+
+                    b.Navigation("Patrimonios");
                 });
 #pragma warning restore 612, 618
         }

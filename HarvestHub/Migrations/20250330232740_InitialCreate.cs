@@ -13,6 +13,22 @@ namespace HarvestHub.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Fornecedores",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Nome = table.Column<string>(type: "text", nullable: true),
+                    CNPJ = table.Column<string>(type: "text", nullable: true),
+                    Telefone = table.Column<string>(type: "text", nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Fornecedores", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Funcionario",
                 columns: table => new
                 {
@@ -28,6 +44,21 @@ namespace HarvestHub.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Funcionario", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PRODUCAO",
+                columns: table => new
+                {
+                    IdProducao = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Tipo = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    Custo = table.Column<decimal>(type: "numeric", nullable: false),
+                    Volume = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PRODUCAO", x => x.IdProducao);
                 });
 
             migrationBuilder.CreateTable(
@@ -49,20 +80,30 @@ namespace HarvestHub.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Contrato",
+                name: "Contratos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Telefone = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    NumeroContrato = table.Column<string>(type: "character varying(11)", maxLength: 11, nullable: false),
                     DataInicio = table.Column<DateTime>(type: "date", nullable: false),
-                    FuncionarioId = table.Column<int>(type: "integer", nullable: false)
+                    DataFim = table.Column<DateTime>(type: "date", nullable: false),
+                    ValorTotal = table.Column<decimal>(type: "numeric", nullable: false),
+                    FuncionarioId = table.Column<int>(type: "integer", nullable: false),
+                    FornecedorId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Contrato", x => x.Id);
+                    table.PrimaryKey("PK_Contratos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Contrato_Funcionario_FuncionarioId",
+                        name: "FK_Contratos_Fornecedores_FornecedorId",
+                        column: x => x.FornecedorId,
+                        principalTable: "Fornecedores",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Contratos_Funcionario_FuncionarioId",
                         column: x => x.FuncionarioId,
                         principalTable: "Funcionario",
                         principalColumn: "Id",
@@ -128,25 +169,25 @@ namespace HarvestHub.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Insumo",
+                name: "INSUMO",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    IdInsumo = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Tipo = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: false),
-                    Codigo = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: false),
+                    TipoInsumo = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: false),
+                    CodInsumo = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: false),
                     Volume = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: false),
                     Custo = table.Column<decimal>(type: "numeric(10,2)", nullable: false),
                     Descricao = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     Marca = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: false),
-                    GerenteDeProducaoCrea = table.Column<string>(type: "text", nullable: false),
+                    GerenteDeProducaoCrea = table.Column<string>(type: "character varying(9)", maxLength: 9, nullable: false),
                     GerenteDeProducaoFuncionarioId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Insumo", x => x.Id);
+                    table.PrimaryKey("PK_INSUMO", x => x.IdInsumo);
                     table.ForeignKey(
-                        name: "FK_Insumo_GerenteDeProducao_GerenteDeProducaoFuncionarioId",
+                        name: "FK_INSUMO_GerenteDeProducao_GerenteDeProducaoFuncionarioId",
                         column: x => x.GerenteDeProducaoFuncionarioId,
                         principalTable: "GerenteDeProducao",
                         principalColumn: "FuncionarioId",
@@ -154,11 +195,13 @@ namespace HarvestHub.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Patrimonio",
+                name: "Patrimonios",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Nome = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Categoria = table.Column<string>(type: "text", nullable: false),
                     Valor = table.Column<decimal>(type: "numeric(10,2)", nullable: false),
                     DataAquisicao = table.Column<DateTime>(type: "date", nullable: false),
                     GerenteDeProducaoCrea = table.Column<string>(type: "text", nullable: false),
@@ -166,9 +209,9 @@ namespace HarvestHub.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Patrimonio", x => x.Id);
+                    table.PrimaryKey("PK_Patrimonios", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Patrimonio_GerenteDeProducao_GerenteDeProducaoFuncionarioId",
+                        name: "FK_Patrimonios_GerenteDeProducao_GerenteDeProducaoFuncionarioId",
                         column: x => x.GerenteDeProducaoFuncionarioId,
                         principalTable: "GerenteDeProducao",
                         principalColumn: "FuncionarioId",
@@ -176,18 +219,23 @@ namespace HarvestHub.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contrato_FuncionarioId",
-                table: "Contrato",
+                name: "IX_Contratos_FornecedorId",
+                table: "Contratos",
+                column: "FornecedorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Contratos_FuncionarioId",
+                table: "Contratos",
                 column: "FuncionarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Insumo_GerenteDeProducaoFuncionarioId",
-                table: "Insumo",
+                name: "IX_INSUMO_GerenteDeProducaoFuncionarioId",
+                table: "INSUMO",
                 column: "GerenteDeProducaoFuncionarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Patrimonio_GerenteDeProducaoFuncionarioId",
-                table: "Patrimonio",
+                name: "IX_Patrimonios_GerenteDeProducaoFuncionarioId",
+                table: "Patrimonios",
                 column: "GerenteDeProducaoFuncionarioId");
 
             migrationBuilder.CreateIndex(
@@ -200,19 +248,25 @@ namespace HarvestHub.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Contrato");
+                name: "Contratos");
 
             migrationBuilder.DropTable(
-                name: "Insumo");
+                name: "INSUMO");
 
             migrationBuilder.DropTable(
-                name: "Patrimonio");
+                name: "Patrimonios");
+
+            migrationBuilder.DropTable(
+                name: "PRODUCAO");
 
             migrationBuilder.DropTable(
                 name: "Receita");
 
             migrationBuilder.DropTable(
                 name: "RecursosHumanos");
+
+            migrationBuilder.DropTable(
+                name: "Fornecedores");
 
             migrationBuilder.DropTable(
                 name: "GerenteDeProducao");
