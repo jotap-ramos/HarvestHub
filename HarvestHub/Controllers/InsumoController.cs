@@ -12,9 +12,9 @@ namespace HarvestHub.Controllers
 {
     public class InsumoController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly HarvestHubContext _context;
 
-        public InsumoController(ApplicationDbContext context)
+        public InsumoController(HarvestHubContext context)
         {
             _context = context;
         }

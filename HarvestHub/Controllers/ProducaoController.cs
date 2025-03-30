@@ -12,9 +12,9 @@ namespace HarvestHub.Controllers
 {
     public class ProducaoController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly HarvestHubContext _context;
 
-        public ProducaoController(ApplicationDbContext context)
+        public ProducaoController(HarvestHubContext context)
         {
             _context = context;
         }
