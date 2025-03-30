@@ -1,0 +1,32 @@
+﻿@model List<HarvestHub.Models.Fornecedor>
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h3>Fornecedores cadastrados</h3>
+<a asp-action="Create" method="post">Novo</a>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Nome</th>
+			<th>CNPJ</th>
+			<th>Telefone</th>
+			<th>Email</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var fornecedor in Model)
+		{
+			<tr>
+				<td>@fornecedor.Nome</td>
+				<td>@fornecedor.CNPJ</td>
+				<td>@fornecedor?.Telefone?.ToString()</td>
+				<td>@fornecedor?.Email</td>
+				<td>
+					<a asp-action="Edit" asp-route-id="@fornecedor.Id">Editar</a>
+					<a asp-action="Delete" asp-route-id="@fornecedor.Id">Delete</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
