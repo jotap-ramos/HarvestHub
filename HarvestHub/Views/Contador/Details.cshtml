@@ -52,6 +52,44 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CRC)
         </dd>
+        <hr />
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Funcionario.Contratos)
+        </dt>
+        <tbody>
+        @foreach (var contrato in Model.Funcionario.Contratos)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => contrato.DataInicio)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => contrato.Telefone)
+                </td>
+            </tr>
+        }
+        </tbody>
+        
+        <hr />
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Receitas)
+        </dt>
+        <tbody>
+        @foreach (var receita in Model.Receitas)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => receita.DataRegistro)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => receita.Valor)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => receita.Tipo)
+                </td>
+            </tr>
+        }
+        </tbody>
     </dl>
 </div>
 <div>

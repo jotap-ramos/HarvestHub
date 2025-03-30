@@ -9,5 +9,5 @@ public class Contador
     [Required, MaxLength(15)]
     public required string CRC { get; set; }
     public required Funcionario Funcionario { get; set; }
-    public ICollection<Receita>? Receitas { get; set; }
+    public required ICollection<Receita> Receitas { get; set; }
 }

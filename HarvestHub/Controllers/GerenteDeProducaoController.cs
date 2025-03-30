@@ -28,6 +28,9 @@ namespace HarvestHub.Controllers
 
             var gerente = await context.GerenteDeProducao
                 .Include(g => g.Funcionario)
+                .Include(g => g.Funcionario.Contratos)
+                .Include(g => g.Insumos)
+                .Include(g => g.Patrimonios)
                 .FirstOrDefaultAsync(m => m.Funcionario.Id == id);
             
             if (gerente == null)
@@ -58,7 +61,8 @@ namespace HarvestHub.Controllers
                     DataAdmissao = DateTime.SpecifyKind(viewmodel.DataAdmissao, DateTimeKind.Utc),
                     CPF = viewmodel.CPF,
                     DataNascimento = DateTime.SpecifyKind(viewmodel.DataNascimento, DateTimeKind.Utc),
-                    Status = viewmodel.Status
+                    Status = viewmodel.Status,
+                    Contratos = new List<Contrato>()
                 };
                 
                 context.Funcionario.Add(funcionario);
@@ -66,7 +70,9 @@ namespace HarvestHub.Controllers
                 {
                     FuncionarioId = funcionario.Id,
                     Funcionario = funcionario,
-                    CREA = viewmodel.CREA
+                    CREA = viewmodel.CREA,
+                    Patrimonios = new List<Patrimonio>(),
+                    Insumos = new List<Insumo>()
                 };
                 funcionario.GerenteDeProducao = gerente;
 

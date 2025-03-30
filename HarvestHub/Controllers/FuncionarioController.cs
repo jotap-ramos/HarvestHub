@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HarvestHub.Models;
+using HarvestHub.ViewModels;
 
 namespace HarvestHub.Controllers
 {
@@ -27,7 +28,9 @@ namespace HarvestHub.Controllers
             }
 
             var funcionario = await context.Funcionario
+                .Include(funcionario => funcionario.Contratos)
                 .FirstOrDefaultAsync(m => m.Id == id);
+            
             if (funcionario == null)
             {
                 return NotFound();
@@ -47,15 +50,31 @@ namespace HarvestHub.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Salario,DataAdmissao,CPF,DataNascimento,Status")] Funcionario funcionario)
+        public async Task<IActionResult> Create([Bind("Nome,Salario,DataAdmissao,CPF,DataNascimento,Status")] CreateFuncionarioViewModel viewModel)
         {
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                Console.WriteLine(error.ErrorMessage);
+            }
+            
             if (ModelState.IsValid)
             {
-                context.Add(funcionario);
+                var funcionario = new Funcionario
+                {
+                    Nome = viewModel.Nome,
+                    Salario = viewModel.Salario,
+                    DataAdmissao = viewModel.DataAdmissao,
+                    CPF = viewModel.CPF,
+                    DataNascimento = viewModel.DataNascimento,
+                    Status = viewModel.Status,
+                    Contratos = new List<Contrato>()
+                };
+                
+                context.Funcionario.Add(funcionario);
                 await context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(funcionario);
+            return View(viewModel);
         }
 
         // GET: Funcionario/Edit/5
@@ -135,6 +154,10 @@ namespace HarvestHub.Controllers
             var funcionario = await context.Funcionario.FindAsync(id);
             if (funcionario != null)
             {
+                if (funcionario.Contador != null) context.Contador.Remove(funcionario.Contador);
+                if (funcionario.GerenteDeProducao != null) context.GerenteDeProducao.Remove(funcionario.GerenteDeProducao);
+                if (funcionario.RecursosHumanos != null) context.RecursosHumanos.Remove(funcionario.RecursosHumanos);
+                
                 context.Funcionario.Remove(funcionario);
             }
 

@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,7 +11,7 @@ public class Contrato
     [Required, MaxLength(20)]
     public required string Telefone { get; set; }
     private DateTime _dataInicio;
-    [Required, DataType(DataType.Date), Column(TypeName = "date")]
+    [Required, DataType(DataType.Date), Column(TypeName = "date"), DisplayName("Data de Inicio")]
     public DateTime DataInicio
     {
         get => _dataInicio;
