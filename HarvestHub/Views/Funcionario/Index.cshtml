@@ -55,9 +55,28 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+                @if (item.Contador != null)
+                {
+                    <a asp-controller = "Contador" asp-action="Edit" asp-route-id="@item.Id">Editar</a> 
+                    <a asp-controller = "Contador" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> 
+                    <a asp-controller = "Contador" asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+                } else if (item.GerenteDeProducao != null)
+                {
+                    <a asp-controller = "GerenteDeProducao" asp-action="Edit" asp-route-id="@item.Id">Editar</a> 
+                    <a asp-controller = "GerenteDeProducao" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> 
+                    <a asp-controller = "GerenteDeProducao" asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+                } else if (item.RecursosHumanos != null)
+                {
+                    <a asp-controller = "RecursosHumanos" asp-action="Edit" asp-route-id="@item.Id">Editar</a> 
+                    <a asp-controller = "RecursosHumanos" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> 
+                    <a asp-controller = "RecursosHumanos" asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+                }
+                else
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+                }
             </td>
         </tr>
 }

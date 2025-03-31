@@ -16,7 +16,12 @@ namespace HarvestHub.Controllers
         // GET: Funcionario
         public async Task<IActionResult> Index()
         {
-            return View(await context.Funcionario.ToListAsync());
+            return View(await context.Funcionario
+                .Include(funcionario => funcionario.Contador)
+                .Include(funcionario => funcionario.RecursosHumanos)
+                .Include(funcionario => funcionario.GerenteDeProducao)
+                .ToListAsync()
+            );
         }
 
         // GET: Funcionario/Details/5
