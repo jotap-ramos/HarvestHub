@@ -11,7 +11,7 @@ using HarvestHub.ViewModels;
 
 namespace HarvestHub.Controllers
 {
-    public class ContadorController(ApplicationContext context) : Controller
+    public class ContadorController(AppDbContext context) : Controller
     {
         // GET: Funcionario
         public async Task<IActionResult> Index()

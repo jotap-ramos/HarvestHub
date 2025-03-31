@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HarvestHub.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(AppDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -23,13 +23,13 @@ namespace HarvestHub.Migrations
 
             modelBuilder.Entity("HarvestHub.Models.Insumo", b =>
                 {
-                    b.Property<int>("IdInsumo")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdInsumo"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CodInsumo")
+                    b.Property<string>("Codigo")
                         .IsRequired()
                         .HasMaxLength(45)
                         .HasColumnType("character varying(45)");
@@ -51,7 +51,7 @@ namespace HarvestHub.Migrations
                         .HasMaxLength(45)
                         .HasColumnType("character varying(45)");
 
-                    b.Property<string>("TipoInsumo")
+                    b.Property<string>("Tipo")
                         .IsRequired()
                         .HasMaxLength(45)
                         .HasColumnType("character varying(45)");
@@ -61,7 +61,7 @@ namespace HarvestHub.Migrations
                         .HasMaxLength(45)
                         .HasColumnType("character varying(45)");
 
-                    b.HasKey("IdInsumo");
+                    b.HasKey("Id");
 
                     b.ToTable("INSUMO");
                 });

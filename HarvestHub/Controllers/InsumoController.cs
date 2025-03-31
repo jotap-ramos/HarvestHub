@@ -12,9 +12,9 @@ namespace HarvestHub.Controllers
 {
     public class InsumoController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly AppDbContext _context;
 
-        public InsumoController(ApplicationDbContext context)
+        public InsumoController(AppDbContext context)
         {
             _context = context;
         }
@@ -22,7 +22,7 @@ namespace HarvestHub.Controllers
         // GET: Insumo
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Insumos.ToListAsync());
+            return View(await _context.Insumo.ToListAsync());
         }
         
         // GET: Insumo/Create
@@ -34,7 +34,7 @@ namespace HarvestHub.Controllers
         // POST: Insumo/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdInsumo,TipoInsumo,CodInsumo,Volume,Custo,Descricao,Marca,GerenteDeProducaoCrea")] Insumo insumo)
+        public async Task<IActionResult> Create([Bind("Id,Tipo,Codigo,Volume,Custo,Descricao,Marca,GerenteDeProducaoCrea")] Insumo insumo)
         {
             if (ModelState.IsValid)
             {
@@ -54,8 +54,8 @@ namespace HarvestHub.Controllers
                 return NotFound();
             }
 
-            var insumo = await _context.Insumos
-                .FirstOrDefaultAsync(m => m.IdInsumo == id);
+            var insumo = await _context.Insumo
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (insumo == null)
             {
                 return NotFound();
@@ -69,10 +69,10 @@ namespace HarvestHub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var insumo = await _context.Insumos.FindAsync(id);
+            var insumo = await _context.Insumo.FindAsync(id);
             if (insumo != null)
             {
-                _context.Insumos.Remove(insumo);
+                _context.Insumo.Remove(insumo);
             }
 
             await _context.SaveChangesAsync();

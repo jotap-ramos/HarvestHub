@@ -23,4 +23,6 @@ public class Insumo
     public required string Marca { get; set; }
     public required string GerenteDeProducaoCrea { get; set; }
     public required GerenteDeProducao GerenteDeProducao { get; set; }
+
+    public ICollection<Estoque> Estoques { get; set; } = new List<Estoque>();
 }

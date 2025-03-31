@@ -9,7 +9,7 @@ using HarvestHub.ViewModels;
 
 namespace HarvestHub.Controllers
 {
-    public class RecursosHumanosController(ApplicationContext context) : Controller
+    public class RecursosHumanosController(AppDbContext context) : Controller
     {
         public async Task<IActionResult> Index()
         {

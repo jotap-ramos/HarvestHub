@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HarvestHub.Models;
 
@@ -11,7 +12,8 @@ public partial class Estoque
 
     public string Local { get; set; } = null!;
 
-    public int InsumoIdinsumo { get; set; }
+    public int InsumoId{ get; set; }
 
-    public virtual Insumo InsumoIdinsumoNavigation { get; set; } = null!;
+    public required Insumo Insumo{ get; set; }
+
 }

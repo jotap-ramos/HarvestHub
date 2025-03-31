@@ -12,15 +12,15 @@ namespace HarvestHub.Controllers
 {
     public class ProducaoController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly AppDbContext _context;
 
-        public ProducaoController(ApplicationDbContext context)
+        public ProducaoController(AppDbContext context)
         {
             _context = context;
         }
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Producoes.ToListAsync());
+            return View(await _context.Producao.ToListAsync());
         }
         // GET: Producao/Create
         public IActionResult Create()

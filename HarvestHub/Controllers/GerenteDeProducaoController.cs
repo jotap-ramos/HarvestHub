@@ -6,7 +6,7 @@ using HarvestHub.ViewModels;
 
 namespace HarvestHub.Controllers
 {
-    public class GerenteDeProducaoController(ApplicationContext context) : Controller
+    public class GerenteDeProducaoController(AppDbContext context) : Controller
     {
         // GET: GerenteDeProducao
         public async Task<IActionResult> Index()

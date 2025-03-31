@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HarvestHub.Models;
 
@@ -11,7 +12,13 @@ public partial class Despesa
 
     public decimal Valor { get; set; }
 
-    public DateOnly DataRegistro { get; set; }
+    public DateTime DataRegistro { get; set; }
 
-    public DateOnly? DataPagamento { get; set; }
+    private DateTime _dataPagamento;
+    [Required, DataType(DataType.Date), Column(TypeName = "date"), DisplayName("Data de Pagamento")]
+    public required DateTime DataPagamento
+    {
+        get => _dataPagamento;
+        set => _dataPagamento = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+    }
 }

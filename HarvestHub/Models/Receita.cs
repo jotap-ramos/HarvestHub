@@ -22,5 +22,5 @@ public class Receita
         set => _dataRegistro = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
     public int ContadorFuncionarioId { get; set; }
-    public required Contador Contador { get; set; }
+    public required Contador? Contador { get; set; }
 }

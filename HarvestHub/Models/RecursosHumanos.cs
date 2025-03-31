@@ -9,4 +9,6 @@ public class RecursosHumanos
     [Required, MaxLength(50)]
     public required string CRA { get; set; }
     public required Funcionario Funcionario { get; set; }
+
+
 }
