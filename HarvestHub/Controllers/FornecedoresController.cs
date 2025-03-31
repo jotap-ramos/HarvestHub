@@ -1,5 +1,6 @@
 ﻿using HarvestHub.Data;
 using HarvestHub.Models;
+using HarvestHub.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,31 +23,67 @@ namespace HarvestHub.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Id, Nome, CNPJ, Telefone, Email, Contratos")] Fornecedor fornecedor)
+        public async Task<IActionResult> Create([Bind("Nome, CNPJ, Telefone, Email")] CreateFornecedorViewModel viewmodel)
         {
             if (ModelState.IsValid)
             {
+                var fornecedor = new Fornecedor
+                {
+                    Nome = viewmodel.Nome,
+                    CNPJ = viewmodel.CNPJ,
+                    Telefone = viewmodel.Telefone,
+                    Email = viewmodel.Email,
+                    Contratos = new List<Contrato>()
+                };
+                
                 _context.Fornecedores.Add(fornecedor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(fornecedor);
+            
+            return View(viewmodel);
         }
         public async Task<IActionResult> Edit(int id)
         {
-            var fornecedor = await _context.Fornecedores.FirstOrDefaultAsync(x => x.Id == id);
-            return View(fornecedor);
+            var fornecedor = await _context.Fornecedores
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (fornecedor == null)
+            {
+                return NotFound();
+            }
+
+            var viewmodel = new EditFornecedorViewModel
+            {
+                Nome = fornecedor.Nome,
+                CNPJ = fornecedor.CNPJ,
+                Telefone = fornecedor.Telefone,
+                Email = fornecedor.Email
+            };
+            
+            return View(viewmodel);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, [Bind("Id, Nome, CNPJ, Telefone, Email, Contratos")] Fornecedor fornecedor)
+        public async Task<IActionResult> Edit(int id, [Bind("Nome, CNPJ, Telefone, Email")] EditFornecedorViewModel viewmodel)
         {
             if (ModelState.IsValid)
             {
+                var fornecedor = await _context.Fornecedores.FirstOrDefaultAsync(x => x.Id == id);
+                if (fornecedor == null)
+                {
+                    return NotFound();
+                }
+                
+                fornecedor.Nome = viewmodel.Nome;
+                fornecedor.CNPJ = viewmodel.CNPJ;
+                fornecedor.Telefone = viewmodel.Telefone;
+                fornecedor.Email = viewmodel.Email;
+                
                 _context.Update(fornecedor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(fornecedor);
+            return View(viewmodel);
         }
         public async Task<IActionResult> Delete(int id)
         {

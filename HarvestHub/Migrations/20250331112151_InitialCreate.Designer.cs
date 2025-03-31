@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HarvestHub.Migrations
 {
     [DbContext(typeof(HarvestHubContext))]
-    [Migration("20250331020821_InitialCreate")]
+    [Migration("20250331112151_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -143,15 +143,20 @@ namespace HarvestHub.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CNPJ")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(14)
+                        .HasColumnType("character varying(14)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Telefone")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");

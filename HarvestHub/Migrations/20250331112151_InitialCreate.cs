@@ -34,10 +34,10 @@ namespace HarvestHub.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Nome = table.Column<string>(type: "text", nullable: true),
-                    CNPJ = table.Column<string>(type: "text", nullable: true),
-                    Telefone = table.Column<string>(type: "text", nullable: true),
-                    Email = table.Column<string>(type: "text", nullable: true)
+                    Nome = table.Column<string>(type: "text", nullable: false),
+                    CNPJ = table.Column<string>(type: "character varying(14)", maxLength: 14, nullable: false),
+                    Telefone = table.Column<string>(type: "text", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
