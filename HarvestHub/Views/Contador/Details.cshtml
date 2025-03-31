@@ -52,44 +52,100 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CRC)
         </dd>
-        <hr />
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Funcionario.Contratos)
-        </dt>
-        <tbody>
-        @foreach (var contrato in Model.Funcionario.Contratos)
+
+        @if (Model.Funcionario.Contratos.Count > 0)
         {
-            <tr>
-                <td>
-                    @Html.DisplayNameFor(model => contrato.DataInicio)
-                </td>
-                <td>
-                    @Html.DisplayNameFor(model => contrato.Telefone)
-                </td>
-            </tr>
+            <hr />
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Funcionario.Contratos)
+            </dt>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Funcionario.Contratos.First().NumeroContrato)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Funcionario.Contratos.First().Telefone)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Funcionario.Contratos.First().ValorTotal)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Funcionario.Contratos.First().DataInicio)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Funcionario.Contratos.First().DataFim)
+                    </td>
+                </tr>
+                </thead>
+
+                <tbody>
+                @foreach (var contrato in Model.Funcionario.Contratos)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => contrato.NumeroContrato)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => contrato.Telefone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => contrato.ValorTotal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => contrato.DataInicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => contrato.DataFim)
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
         }
-        </tbody>
-        
-        <hr />
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Receitas)
-        </dt>
-        <tbody>
-        @foreach (var receita in Model.Receitas)
+
+        @if (Model.Receitas.Count > 0)
         {
-            <tr>
-                <td>
-                    @Html.DisplayNameFor(model => receita.DataRegistro)
-                </td>
-                <td>
-                    @Html.DisplayNameFor(model => receita.Valor)
-                </td>
-                <td>
-                    @Html.DisplayNameFor(model => receita.Tipo)
-                </td>
-            </tr>
+            <hr />
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Receitas)
+            </dt>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Receitas.First().Tipo)
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Receitas.First().Valor)
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Receitas.First().DataRegistro)
+                        </td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                @foreach (var contrato in Model.Receitas)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => contrato.Tipo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => contrato.Valor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => contrato.DataRegistro)
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
         }
-        </tbody>
     </dl>
 </div>
 <div>

@@ -36,6 +36,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Volume)
             </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdProducao">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdProducao">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdProducao">Deletar</a>
+            </td>
         </tr>
 }
     </tbody>

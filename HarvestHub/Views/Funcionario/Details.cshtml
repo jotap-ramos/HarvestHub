@@ -47,23 +47,60 @@
             @Html.DisplayFor(model => model.Status)
         </dd>
     </dl>
-    <hr />
-    <dt class = "col-sm-2">
-        @Html.DisplayNameFor(model => model.Contratos)
-    </dt>
-    <tbody>
-    @foreach (var contrato in Model.Contratos)
+    
+    
+    @if (Model.Contratos.Count > 0)
     {
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => contrato.DataInicio)
-            </td>
-            <td>
-                @Html.DisplayNameFor(model => contrato.Telefone)
-            </td>
-        </tr>
+        <hr />
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Contratos)
+        </dt>
+        
+        <table class="table">
+            <thead>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Contratos.First().NumeroContrato)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Contratos.First().Telefone)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Contratos.First().ValorTotal)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Contratos.First().DataInicio)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => model.Contratos.First().DataFim)
+                </td>
+            </tr>
+            </thead>
+
+            <tbody>
+            @foreach (var contrato in Model.Contratos)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => contrato.NumeroContrato)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => contrato.Telefone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => contrato.ValorTotal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => contrato.DataInicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => contrato.DataFim)
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
     }
-    </tbody>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Editar</a> |

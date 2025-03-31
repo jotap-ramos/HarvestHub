@@ -30,6 +30,7 @@ namespace HarvestHub.Controllers
             
             return View(insumos.ConvertAll(insumo => new IndexInsumoViewModel
             {
+                Tipo = insumo.TipoInsumo,
                 Codigo = insumo.CodInsumo,
                 Descricao = insumo.Descricao,
                 Crea = insumo.GerenteDeProducao.CREA,

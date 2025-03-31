@@ -53,67 +53,160 @@
             @Html.DisplayFor(model => model.CREA)
         </dd>
     </dl>
-    <hr />
-    <dt class = "col-sm-2">
-        @Html.DisplayNameFor(model => model.Funcionario.Contratos)
-    </dt>
-    <tbody>
-    @foreach (var contrato in Model.Funcionario.Contratos)
+    
+    @if (Model.Funcionario.Contratos.Count > 0)
     {
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => contrato.DataInicio)
-            </td>
-            <td>
-                @Html.DisplayNameFor(model => contrato.Telefone)
-            </td>
-        </tr>
-    }
-    </tbody>
+        <hr />
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Funcionario.Contratos)
+        </dt>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Funcionario.Contratos.First().NumeroContrato)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Funcionario.Contratos.First().Telefone)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Funcionario.Contratos.First().ValorTotal)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Funcionario.Contratos.First().DataInicio)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Funcionario.Contratos.First().DataFim)
+                    </td>
+                </tr>
+            </thead>
 
-    <hr />
-    <dt class = "col-sm-2">
-        @Html.DisplayNameFor(model => model.Patrimonios)
-    </dt>
-    <tbody>
-    @foreach (var patrimonio in Model.Patrimonios)
-    {
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => patrimonio.DataAquisicao)
-            </td>
-            <td>
-                @Html.DisplayNameFor(model => patrimonio.Valor)
-            </td>
-        </tr>
+            <tbody>
+            @foreach (var contrato in Model.Funcionario.Contratos)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => contrato.NumeroContrato)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => contrato.Telefone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => contrato.ValorTotal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => contrato.DataInicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => contrato.DataFim)
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
     }
-    </tbody>
-    <hr />
-    <dt class = "col-sm-2">
-        @Html.DisplayNameFor(model => model.Insumos)
-    </dt>
-    <tbody>
-    @foreach (var insumo in Model.Insumos)
+
+    
+    @if (Model.Patrimonios.Count > 0)
     {
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => insumo.CodInsumo)
-            </td>
-            <td>
-                @Html.DisplayNameFor(model => insumo.Marca)
-            </td>
-            <td>
-                @Html.DisplayNameFor(model => insumo.TipoInsumo)
-            </td>
-            <td>
-                @Html.DisplayNameFor(model => insumo.Volume)
-            </td>
-            <td>
-                @Html.DisplayNameFor(model => insumo.Custo)
-            </td>
-        </tr>
+        <hr />
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Patrimonios)
+        </dt>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Patrimonios.First().Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Patrimonios.First().Categoria)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Patrimonios.First().Valor)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Patrimonios.First().DataAquisicao)
+                    </td>
+                </tr>
+            </thead>
+
+            <tbody>
+            @foreach (var patrimonio in Model.Patrimonios)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => patrimonio.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => patrimonio.Categoria)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => patrimonio.Valor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => patrimonio.DataAquisicao)
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
     }
-    </tbody>
+    
+    @if (Model.Insumos.Count > 0)
+    {
+        <hr />
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Insumos)
+        </dt>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Insumos.First().CodInsumo)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Insumos.First().Marca)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Insumos.First().TipoInsumo)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Insumos.First().Volume)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Insumos.First().Custo)
+                    </td>
+                </tr>
+            </thead>
+        
+            <tbody>
+            @foreach (var insumo in Model.Insumos)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => insumo.CodInsumo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => insumo.Marca)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => insumo.TipoInsumo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => insumo.Volume)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => insumo.Custo)
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Funcionario.Id">Editar</a> |
