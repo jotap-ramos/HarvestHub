@@ -1,0 +1,44 @@
+@{
+    ViewData["Title"] = "Gerenciar Balanço";
+}
+
+<div class="container mt-5">
+    <h1 class="mb-4">@ViewData["Title"]</h1>
+
+    <div class="row">
+        <!-- Card para Registrar Despesa -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title"><i class="bi bi-cash-coin fs-3 text-danger"></i></h5>
+                    <h4 class="card-subtitle mb-3">Registrar Despesa</h4>
+                    <p class="text-muted">Registre novos gastos e custos operacionais</p>
+                    <a asp-action="RegistrarDespesa" class="btn btn-danger btn-lg">
+                        Acessar <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card para Cadastrar Receita -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title"><i class="bi bi-graph-up fs-3 text-success"></i></h5>
+                    <h4 class="card-subtitle mb-3">Cadastrar Receita</h4>
+                    <p class="text-muted">Registre novas entradas e ganhos financeiros</p>
+                    <a asp-action="CadastrarReceita" class="btn btn-success btn-lg">
+                        Acessar <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão Voltar -->
+    <div class="mt-4">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </a>
+    </div>
+</div>

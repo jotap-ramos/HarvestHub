@@ -13,6 +13,8 @@ namespace HarvestHub.Data
         public DbSet<Contrato> Contratos { get; set; }
         public DbSet<Producao> Producoes { get; set; }
         public DbSet<Insumo> Insumos { get; set; }
+        public DbSet<Despesa> Despesas { get; set; }
+        public DbSet<Receita> Receitas { get; set; }
         
         public DbSet<Contador> Contador { get; set; } = default!;
         public DbSet<Funcionario> Funcionario { get; set; } = default!;

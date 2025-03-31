@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace HarvestHub.Models;
 
@@ -9,4 +9,6 @@ public class RecursosHumanos
     [Required, MaxLength(50)]
     public required string CRA { get; set; }
     public required Funcionario Funcionario { get; set; }
+
+
 }

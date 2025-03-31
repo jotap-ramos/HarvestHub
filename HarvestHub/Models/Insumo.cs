@@ -1,6 +1,5 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 namespace HarvestHub.Models
 {
     [Table("INSUMO")]
@@ -9,16 +8,13 @@ namespace HarvestHub.Models
         [Key]
         public int IdInsumo { get; set; }
 
-        [Required]
-        [StringLength(45)]
+        [Required, MaxLength(45)]
         public string TipoInsumo { get; set; }  = "";
 
-        [Required]
-        [StringLength(45)]
+        [Required, MaxLength(45)]
         public string CodInsumo { get; set; }  = "";
 
-        [Required]
-        [StringLength(45)]
+        [Required, MaxLength(45)]
         public string Volume { get; set; }  = "";
 
         [Required]
@@ -26,11 +22,13 @@ namespace HarvestHub.Models
         [Column(TypeName = "DECIMAL(10, 2)")]
         public decimal Custo { get; set; }
 
-        [StringLength(100)]
+        [MaxLength(100)]
         public string? Descricao { get; set; }
 
         [Required, MaxLength(45)]
         public required string Marca { get; set; } = "";
+
+        public required ICollection<Estoque> Estoques { get; set; } = new List<Estoque>();
 
         [Required]
         [StringLength(9)]

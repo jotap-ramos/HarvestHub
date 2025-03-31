@@ -1,4 +1,4 @@
-﻿namespace HarvestHub.Models;
+namespace HarvestHub.Models;
 
 public class Fornecedor
 {
