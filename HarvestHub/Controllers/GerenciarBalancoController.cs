@@ -9,9 +9,9 @@ namespace HarvestHub.Controllers
 {
     public class GerenciarBalancoController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly HarvestHubContext _context;
 
-        public GerenciarBalancoController(AppDbContext context)
+        public GerenciarBalancoController(HarvestHubContext context)
         {
             _context = context;
         }
@@ -43,7 +43,7 @@ namespace HarvestHub.Controllers
                     DataPagamento = viewModel.DataPagamento
                 };
 
-                _context.Despesa.Add(despesa);
+                _context.Despesas.Add(despesa);
                 await _context.SaveChangesAsync();
                 TempData["SuccessMessage"] = "Despesa registrada com sucesso!";
                 return RedirectToAction(nameof(ListarRegistros));
@@ -106,7 +106,7 @@ namespace HarvestHub.Controllers
                     DataRegistro = DateTime.UtcNow // Removi do ViewModel (definido pelo sistema)
                 };
 
-                _context.Receita.Add(receita);
+                _context.Receitas.Add(receita);
                 await _context.SaveChangesAsync();
                 TempData["SuccessMessage"] = "Receita cadastrada com sucesso!";
                 return RedirectToAction(nameof(ListarRegistros));
@@ -117,8 +117,8 @@ namespace HarvestHub.Controllers
         // GET: GerenciarBalanco/ListarRegistros
         public async Task<IActionResult> ListarRegistros()
         {
-            var despesas = await _context.Despesa.ToListAsync();
-            var receitas = await _context.Receita.ToListAsync();
+            var despesas = await _context.Despesas.ToListAsync();
+            var receitas = await _context.Receitas.ToListAsync();
 
             return View(new BalancoViewModel
             {
