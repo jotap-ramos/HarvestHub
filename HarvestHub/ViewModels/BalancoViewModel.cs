@@ -4,7 +4,7 @@ namespace HarvestHub.ViewModels
 {
     public class BalancoViewModel
     {
-        public List<Despesa> Despesas { get; set; }
-        public List<Receita> Receitas { get; set; }
+        public required List<Despesa> Despesas { get; set; }
+        public required List<Receita> Receitas { get; set; }
     }
 }
