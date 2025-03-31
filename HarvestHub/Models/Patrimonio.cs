@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HarvestHub.Models
 {
@@ -11,10 +13,21 @@ namespace HarvestHub.Models
         public string? Nome { get; set; }
         [Required]
         public string? Categoria { get; set; }
+        
         [Required]
         [DataType(DataType.Currency)]
-        public double Valor { get; set; }
-        public DateOnly DataAquisicao { get; set; }
-
+        [Column(TypeName = "decimal(10, 2)")]
+        public decimal Valor { get; set; }
+        
+        private DateTime _dataAquisicao;
+        [Required, DataType(DataType.Date), Column(TypeName = "date"), DisplayName("Data de Aquisicao")]
+        public DateTime DataAquisicao
+        {
+            get => _dataAquisicao;
+            set => _dataAquisicao = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
+        
+        public required string GerenteDeProducaoCrea { get; set; }
+        public required GerenteDeProducao GerenteDeProducao { get; set; }
     }
 }

@@ -1,0 +1,98 @@
+@model HarvestHub.Models.Contador
+
+@{
+    ViewData["Title"] = "Detalhes do Contador";
+}
+
+<h1>Detalhes do Contador</h1>
+
+<div>
+    <h4>Contador</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Funcionario.Nome)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Funcionario.Nome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Funcionario.Salario)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Funcionario.Salario)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Funcionario.DataAdmissao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Funcionario.DataAdmissao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Funcionario.CPF)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Funcionario.CPF)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Funcionario.DataNascimento)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Funcionario.DataNascimento)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Funcionario.Status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Funcionario.Status)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CRC)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CRC)
+        </dd>
+        <hr />
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Funcionario.Contratos)
+        </dt>
+        <tbody>
+        @foreach (var contrato in Model.Funcionario.Contratos)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => contrato.DataInicio)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => contrato.Telefone)
+                </td>
+            </tr>
+        }
+        </tbody>
+        
+        <hr />
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Receitas)
+        </dt>
+        <tbody>
+        @foreach (var receita in Model.Receitas)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => receita.DataRegistro)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => receita.Valor)
+                </td>
+                <td>
+                    @Html.DisplayNameFor(model => receita.Tipo)
+                </td>
+            </tr>
+        }
+        </tbody>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Funcionario.Id">Editar</a> |
+    <a asp-action="Index">Voltar para Contadores</a>
+</div>
