@@ -10,16 +10,13 @@ namespace HarvestHub.Models
         [Key]
         public int IdInsumo { get; set; }
 
-        [Required]
-        [StringLength(45)]
+        [Required, MaxLength(45)]
         public string TipoInsumo { get; set; }  = "";
 
-        [Required]
-        [StringLength(45)]
+        [Required, MaxLength(45)]
         public string CodInsumo { get; set; }  = "";
 
-        [Required]
-        [StringLength(45)]
+        [Required, MaxLength(45)]
         public string Volume { get; set; }  = "";
 
         [Required]
@@ -27,7 +24,7 @@ namespace HarvestHub.Models
         [Column(TypeName = "DECIMAL(10, 2)")]
         public decimal Custo { get; set; }
 
-        [StringLength(100)]
+        [MaxLength(100)]
         public string? Descricao { get; set; }
 
         [Required, MaxLength(45)]

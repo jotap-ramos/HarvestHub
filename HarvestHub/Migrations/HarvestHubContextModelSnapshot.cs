@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HarvestHub.Migrations
 {
-    [DbContext(typeof(HarvestHubContext))]
-    partial class HarvestHubContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(AppDbContext))]
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -45,63 +45,22 @@ namespace HarvestHub.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DataFim")
-                        .HasColumnType("date");
-
                     b.Property<DateTime>("DataInicio")
                         .HasColumnType("date");
 
-                    b.Property<int>("FornecedorId")
-                        .HasColumnType("integer");
-
                     b.Property<int>("FuncionarioId")
                         .HasColumnType("integer");
-
-                    b.Property<string>("NumeroContrato")
-                        .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("character varying(11)");
 
                     b.Property<string>("Telefone")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
 
-                    b.Property<decimal>("ValorTotal")
-                        .HasColumnType("numeric");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("FornecedorId");
 
                     b.HasIndex("FuncionarioId");
 
-                    b.ToTable("Contratos");
-                });
-
-            modelBuilder.Entity("HarvestHub.Models.Fornecedor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CNPJ")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Nome")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Telefone")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Fornecedores");
+                    b.ToTable("Contrato");
                 });
 
             modelBuilder.Entity("HarvestHub.Models.Funcionario", b =>
@@ -156,13 +115,13 @@ namespace HarvestHub.Migrations
 
             modelBuilder.Entity("HarvestHub.Models.Insumo", b =>
                 {
-                    b.Property<int>("IdInsumo")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdInsumo"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CodInsumo")
+                    b.Property<string>("Codigo")
                         .IsRequired()
                         .HasMaxLength(45)
                         .HasColumnType("character varying(45)");
@@ -176,8 +135,7 @@ namespace HarvestHub.Migrations
 
                     b.Property<string>("GerenteDeProducaoCrea")
                         .IsRequired()
-                        .HasMaxLength(9)
-                        .HasColumnType("character varying(9)");
+                        .HasColumnType("text");
 
                     b.Property<int>("GerenteDeProducaoFuncionarioId")
                         .HasColumnType("integer");
@@ -187,7 +145,7 @@ namespace HarvestHub.Migrations
                         .HasMaxLength(45)
                         .HasColumnType("character varying(45)");
 
-                    b.Property<string>("TipoInsumo")
+                    b.Property<string>("Tipo")
                         .IsRequired()
                         .HasMaxLength(45)
                         .HasColumnType("character varying(45)");
@@ -197,11 +155,11 @@ namespace HarvestHub.Migrations
                         .HasMaxLength(45)
                         .HasColumnType("character varying(45)");
 
-                    b.HasKey("IdInsumo");
+                    b.HasKey("Id");
 
                     b.HasIndex("GerenteDeProducaoFuncionarioId");
 
-                    b.ToTable("INSUMO");
+                    b.ToTable("Insumo");
                 });
 
             modelBuilder.Entity("HarvestHub.Models.Patrimonio", b =>
@@ -211,10 +169,6 @@ namespace HarvestHub.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Categoria")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<DateTime>("DataAquisicao")
                         .HasColumnType("date");
@@ -226,11 +180,6 @@ namespace HarvestHub.Migrations
                     b.Property<int>("GerenteDeProducaoFuncionarioId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
                     b.Property<decimal>("Valor")
                         .HasColumnType("decimal(10, 2)");
 
@@ -238,33 +187,7 @@ namespace HarvestHub.Migrations
 
                     b.HasIndex("GerenteDeProducaoFuncionarioId");
 
-                    b.ToTable("Patrimonios");
-                });
-
-            modelBuilder.Entity("HarvestHub.Models.Producao", b =>
-                {
-                    b.Property<int>("IdProducao")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdProducao"));
-
-                    b.Property<decimal>("Custo")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("Tipo")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
-
-                    b.Property<string>("Volume")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
-
-                    b.HasKey("IdProducao");
-
-                    b.ToTable("PRODUCAO");
+                    b.ToTable("Patrimonio");
                 });
 
             modelBuilder.Entity("HarvestHub.Models.Receita", b =>
@@ -324,19 +247,11 @@ namespace HarvestHub.Migrations
 
             modelBuilder.Entity("HarvestHub.Models.Contrato", b =>
                 {
-                    b.HasOne("HarvestHub.Models.Fornecedor", "Fornecedor")
-                        .WithMany("Contratos")
-                        .HasForeignKey("FornecedorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("HarvestHub.Models.Funcionario", "Funcionario")
                         .WithMany("Contratos")
                         .HasForeignKey("FuncionarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Fornecedor");
 
                     b.Navigation("Funcionario");
                 });
@@ -399,11 +314,6 @@ namespace HarvestHub.Migrations
             modelBuilder.Entity("HarvestHub.Models.Contador", b =>
                 {
                     b.Navigation("Receitas");
-                });
-
-            modelBuilder.Entity("HarvestHub.Models.Fornecedor", b =>
-                {
-                    b.Navigation("Contratos");
                 });
 
             modelBuilder.Entity("HarvestHub.Models.Funcionario", b =>
