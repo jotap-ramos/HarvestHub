@@ -1,6 +1,6 @@
 using System.Diagnostics;
-using HarvestHub.Models;
 using Microsoft.AspNetCore.Mvc;
+using HarvestHub.Models;
 
 namespace HarvestHub.Controllers;
 
