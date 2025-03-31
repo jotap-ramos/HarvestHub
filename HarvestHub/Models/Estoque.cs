@@ -6,6 +6,7 @@ namespace HarvestHub.Models;
 
 public partial class Estoque
 {
+    [Key]
     public int Idlocal { get; set; }
 
     public string Nome { get; set; } = null!;
@@ -14,6 +15,7 @@ public partial class Estoque
 
     public int InsumoId{ get; set; }
 
+    [ForeignKey("InsumoId")]
     public required Insumo Insumo{ get; set; }
 
 }

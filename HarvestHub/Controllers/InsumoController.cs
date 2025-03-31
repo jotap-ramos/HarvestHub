@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HarvestHub.Data;
 using HarvestHub.Models;
+using HarvestHub.ViewModels;
 
 namespace HarvestHub.Controllers
 {
@@ -22,7 +23,21 @@ namespace HarvestHub.Controllers
         // GET: Insumo
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Insumos.ToListAsync());
+            var insumos = await _context.Insumos
+                .Include(insumo => insumo.GerenteDeProducao)
+                .ToListAsync();
+            
+            
+            return View(insumos.ConvertAll(insumo => new IndexInsumoViewModel
+            {
+                Codigo = insumo.CodInsumo,
+                Descricao = insumo.Descricao,
+                Crea = insumo.GerenteDeProducao.CREA,
+                Custo = insumo.Custo,
+                Id = insumo.IdInsumo,
+                Marca = insumo.Marca,
+                Volume = insumo.Volume
+            }));
         }
         
         // GET: Insumo/Create
@@ -34,15 +49,46 @@ namespace HarvestHub.Controllers
         // POST: Insumo/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdInsumo,TipoInsumo,CodInsumo,Volume,Custo,Descricao,Marca,GerenteDeProducaoCrea")] Insumo insumo)
+        public async Task<IActionResult> Create([Bind("Tipo,Codigo,Volume,Custo,Descricao,Marca,Crea")] CreateInsumoViewModel viewmodel)
         {
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                Console.WriteLine(error.ErrorMessage);
+            }
+            
             if (ModelState.IsValid)
             {
-                _context.Add(insumo);
+                var gerente = await _context.GerenteDeProducao
+                    .Include(gerente => gerente.Funcionario)
+                    .Include(gerente => gerente.Insumos)
+                    .FirstOrDefaultAsync(gerente => gerente.CREA == viewmodel.Crea);
+                
+                if (gerente == null)
+                {
+                    viewmodel.Crea = "";
+                    return View(viewmodel);
+                }
+                
+                var insumo = new Insumo
+                {
+                    TipoInsumo = viewmodel.Tipo,
+                    CodInsumo = viewmodel.Codigo,
+                    Volume = viewmodel.Volume,
+                    Custo = viewmodel.Custo,
+                    Descricao = viewmodel.Descricao,
+                    Marca = viewmodel.Marca,
+                    GerenteDeProducaoId = gerente.Funcionario.Id,
+                    GerenteDeProducao = gerente,
+                    Estoques = new List<Estoque>()
+                };
+                
+                _context.Insumos.Add(insumo);
+                gerente.Insumos.Add(insumo);
+                
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(insumo);
+            return View(viewmodel);
         }
         
 
@@ -55,13 +101,26 @@ namespace HarvestHub.Controllers
             }
 
             var insumo = await _context.Insumos
+                .Include(insumo => insumo.GerenteDeProducao)
                 .FirstOrDefaultAsync(m => m.IdInsumo == id);
+            
             if (insumo == null)
             {
                 return NotFound();
             }
 
-            return View(insumo);
+            var viewmodel = new DeleteInsumoViewModel
+            {
+                Tipo = insumo.TipoInsumo,
+                Codigo = insumo.CodInsumo,
+                Volume = insumo.Volume,
+                Custo = insumo.Custo,
+                Descricao = insumo.Descricao,
+                Marca = insumo.Marca,
+                Crea = insumo.GerenteDeProducao.CREA
+            };
+
+            return View(viewmodel);
         }
 
         // POST: Insumo/Delete/5

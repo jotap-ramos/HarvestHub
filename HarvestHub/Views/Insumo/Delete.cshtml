@@ -1,4 +1,4 @@
-@model HarvestHub.Models.Insumo
+@model HarvestHub.ViewModels.DeleteInsumoViewModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -12,16 +12,16 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoInsumo)
+            @Html.DisplayNameFor(model => model.Tipo)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipoInsumo)
+            @Html.DisplayFor(model => model.Tipo)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CodInsumo)
+            @Html.DisplayNameFor(model => model.Codigo)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CodInsumo)
+            @Html.DisplayFor(model => model.Codigo)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Volume)
@@ -48,15 +48,15 @@
             @Html.DisplayFor(model => model.Marca)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GerenteDeProducaoCrea)
+            @Html.DisplayNameFor(model => model.Crea)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GerenteDeProducaoCrea)
+            @Html.DisplayFor(model => model.Crea)
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="IdInsumo" />
+        <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

@@ -32,7 +32,9 @@ namespace HarvestHub.Models
 
         [Required]
         [StringLength(9)]
-        public required string GerenteDeProducaoCrea { get; set; } = "";
+        public required int GerenteDeProducaoId { get; set; }
+        
+        [ForeignKey("GerenteDeProducaoId")]
         public required GerenteDeProducao GerenteDeProducao { get; set; }
     }
 }

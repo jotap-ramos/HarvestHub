@@ -33,8 +33,13 @@ namespace HarvestHub.Models
         public decimal ValorTotal { get; set; }
         
         public int FuncionarioId { get; set; }
+        
+        [ForeignKey("FuncionarioId")]
         public required Funcionario Funcionario { get; set; }
+        
         public int FornecedorId { get; set; }
+        
+        [ForeignKey("FornecedorId")]
         public Fornecedor? Fornecedor { get; set; }
     }
 }

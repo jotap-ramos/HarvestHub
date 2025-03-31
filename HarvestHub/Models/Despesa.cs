@@ -6,6 +6,7 @@ namespace HarvestHub.Models;
 
 public partial class Despesa
 {
+    [Key]
     public int Iddespesa { get; set; }
 
     public string Tipo { get; set; } = null!;

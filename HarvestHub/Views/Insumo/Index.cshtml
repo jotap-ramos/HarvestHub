@@ -1,4 +1,4 @@
-@model IEnumerable<HarvestHub.Models.Insumo>
+@model IEnumerable<HarvestHub.ViewModels.IndexInsumoViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,10 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TipoInsumo)
+                @Html.DisplayNameFor(model => model.Tipo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CodInsumo)
+                @Html.DisplayNameFor(model => model.Codigo)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Volume)
@@ -31,7 +31,7 @@
                 @Html.DisplayNameFor(model => model.Marca)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GerenteDeProducaoCrea)
+                @Html.DisplayNameFor(model => model.Crea)
             </th>
             <th></th>
         </tr>
@@ -40,10 +40,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.TipoInsumo)
+                @Html.DisplayFor(modelItem => item.Tipo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CodInsumo)
+                @Html.DisplayFor(modelItem => item.Codigo)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Volume)
@@ -58,12 +58,10 @@
                 @Html.DisplayFor(modelItem => item.Marca)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.GerenteDeProducaoCrea)
+                @Html.DisplayFor(modelItem => item.Crea)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdInsumo">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdInsumo">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdInsumo">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

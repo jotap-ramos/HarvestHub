@@ -37,7 +37,7 @@ namespace HarvestHub.Controllers
             {
                 _context.Add(producao);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Create));
+                return RedirectToAction(nameof(Index));
             }
             return View(producao);
         }
