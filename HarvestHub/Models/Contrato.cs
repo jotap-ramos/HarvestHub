@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HarvestHub.Models;
-
-public class Contrato
+namespace HarvestHub.Models
 {
-    [Key]
-    public int Id { get; set; }
+    public class Contrato
+    {
+        [Key]
+        public int Id { get; set; }
 
     [Required, MaxLength(20)]
     public required string Telefone { get; set; }
@@ -18,6 +18,14 @@ public class Contrato
     {
         get => _dataInicio;
         set => _dataInicio = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        [Required]
+        [StringLength(11)]
+        public string? NumeroContrato { get; set; }
+        public DateTime DataInicio { get; set; }
+        public DateTime DataFim { get; set; }
+        public decimal ValorTotal { get; set; }
+        public int FornecedorId { get; set; }
+        public Fornecedor? Fornecedor { get; set; }
     }
 
     // Chave estrangeira

@@ -5,13 +5,10 @@ namespace HarvestHub.Models;
 
 public partial class Fornecedor
 {
-    public int Idfornecedor { get; set; }
-
-    public string NomeFornecedor { get; set; } = null!;
-
-    public string CpfCnpj { get; set; } = null!;
-
-    public string Telefone { get; set; } = null!;
-
-    public string Email { get; set; } = null!;
+    public int Id { get; set; }
+    public string? Nome { get; set; }
+    public string? CNPJ { get; set; }
+    public string? Telefone { get; set; }
+    public string? Email { get; set; }
+    public List<Contrato>? Contratos { get; set; }
 }

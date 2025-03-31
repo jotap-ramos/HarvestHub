@@ -4,12 +4,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HarvestHub.Models;
 
-public class Patrimonio
-{
-    [Key]
-    public int Id { get; set; }
-    [Required]
-    [DataType(DataType.Currency)]
+    public class Patrimonio
+    {
+        [Key]
+        public int Id { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string? Nome { get; set; }
+        [Required]
+        public string? Categoria { get; set; }
+        [Required]
+        [DataType(DataType.Currency)]
     [Column(TypeName = "decimal(10, 2)")]
     public decimal Valor { get; set; }
     private DateTime _dataAquisicao;
