@@ -1,4 +1,3 @@
-<<<<<<<<< Temporary merge branch 1
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -39,4 +38,3 @@ namespace HarvestHub.Models
         public Fornecedor? Fornecedor { get; set; }
     }
 }
->>>>>>>>> Temporary merge branch 2
