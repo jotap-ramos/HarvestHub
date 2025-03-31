@@ -11,5 +11,7 @@ namespace HarvestHub.Data
         public DbSet<Patrimonio> Patrimonios { get; set; }
         public DbSet<Fornecedor> Fornecedores { get; set; }
         public DbSet<Contrato> Contratos { get; set; }
+        public DbSet<Producao> Producoes { get; set; }
+        public DbSet<Insumo> Insumos { get; set; }
     }
 }
