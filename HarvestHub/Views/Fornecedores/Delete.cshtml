@@ -1,0 +1,15 @@
+﻿@model HarvestHub.Models.Fornecedor
+@{
+	ViewData["Title"] = "Delete";
+}
+<h3>Tem certeza que deseja deletar o fornecedor selecionado?</h3>
+
+<p>@Model.Nome</p>
+<p>@Model.CNPJ</p>
+<p>@Model.Telefone</p>
+<p>@Model.Email</p>
+
+<form asp-action="Delete" method="post">
+	<input type="hidden" asp-for="Id" />
+	<input type="submit" class="btn btn-danger" value="Delete" />
+</form>
